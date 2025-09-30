@@ -2,31 +2,31 @@
 
 ## Database Name
 task_manager
-<!-- 
-    CREATE DATABASE IF NOT EXISTS task_manager
+
+  - CREATE DATABASE IF NOT EXISTS task_manager
     DEFAULT CHARACTER SET utf8mb4
     DEFAULT COLLATE  utf8mb4_unicode_ci;
     USE task_manager;
- -->
+
 
 ## Tables
 1. users
    - id, name, email, created_at
-<!-- 
-    CREATE TABLE users (
+
+  - CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         email VARCHAR(150) NOT NULL UNIQUE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
--->
+
 
 
 2. tasks
    - id, user_id, title, description, status (0,1), created_at
 
-<!-- 
-    CREATE TABLE tasks(
+
+  - CREATE TABLE tasks(
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         title VARCHAR(100) NOT NULL,
@@ -35,24 +35,24 @@ task_manager
         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )
--->
+
 
 ## Relationships
 - users → tasks = 1:N
 - tasks.user_id → users.id
 
 ## Insert Data into User Table
-<!-- 
-    INSERT INTO users (name, email) VALUES
+
+ -  INSERT INTO users (name, email) VALUES
     ('Asadul Islam', 'asad@mail.com'),
     ('Fatema Noor', 'fatema@mail.com'),
     ('Kamal Hossain', 'kamal@mail.com');
--->
+
 
 ## Insert Data into Task Table
 
-<!-- 
-    INSERT INTO tasks (user_id, title, description, status) VALUES
+
+ -  INSERT INTO tasks (user_id, title, description, status) VALUES
     (1, 'Database Bakcup', 'taking backup fo servers', 0),
     (1, 'Create Presentation', 'making slides', 1),
     (1, 'Project Research', 'Resouces Collection', 0),
@@ -61,55 +61,55 @@ task_manager
     (3, 'Users Feedbacks', 'sending form link', 1),
     (3, 'Bug Fixing', 'maintaining Login bugs', 0),
     (3, 'Doqumantion', 'designing README File', 0);
--->
+
 
 
 ## Queries Executed
 
 - SELECT all tasks
-<!-- used: SELECT * FROM tasks -->
+- Code: SELECT * FROM tasks
 ![alt text](<show all data.png>)
 
 
 - UPDATE task status
-<!-- used:
+- Code:
     UPDATE tasks
     SET status = 1 -- Done
     WHERE id = 1;
--->
+
 ![alt text](<update status.png>)
 
 
 - DELETE task
-<!-- used:
+- Code:
     DELETE FROM tasks
     WHERE id = 8;
- -->
+
 ![alt text](<deleted id a tasks 8.png>)
 
 
 - ADD NEW TASK
-<!-- 
+- Code
     INSERT INTO tasks (user_id, title, description, status) VALUES
     (2, 'Customar Care', 'handle customers problem', 1);
--->
+
 ![alt text](<added new task.png>)
 
 
 - Sorting and Pagination
 - First 5 rows showing in DESC mode
-<!-- used:
+- used:
     SELECT * FROM tasks
     ORDER BY created_at DESC
     LIMIT 0, 5;
- -->
+
 ![alt text](<sorting and pagination.png>)
 
 - First firve rows showing in ASC mode
-<!-- used:
+- Code:
     SELECT * FROM tasks
     LIMIT 0, 5;
- -->
+
 ![alt text](<first five rost asc.png>)
 
 
@@ -118,27 +118,27 @@ task_manager
 ![alt text](aggregation.png)
 
 - INNER JOIN
-<!-- 
+- Code:
     SELECT u.name, t.title, t.status
     FROM users u
     INNER JOIN tasks t ON u.id = t.user_id;
- -->
+
 ![alt text](<inner join.png>)
 
 - LEFT JOIN
-<!-- 
+- Code:
     SELECT u.name, t.title, t.status
     FROM users u
     LEFT JOIN tasks t ON u.id = t.user_id;
--->
+
 ![alt text](<left join.png>)
 
 - RIGHT JOIN
-<!-- 
+- Code:
     SELECT u.id, u.name, COUNT(t.id) as task_count
     FROM users u
     LEFT JOIN tasks t ON u.id = t.user_id
--->
+
 ![alt text](<rgiht join.png>)
 
 ## Sample Data
